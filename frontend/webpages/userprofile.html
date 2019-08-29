@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <link href="https://fonts.googleapis.com/css?family=Cairo|Heebo|Raleway" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-light bg-light">
+      <img class="techdimg" src="img/tech-elevator-logo.png">
+    <a class="title">TechedIn</a>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img class="img-responsive hidden-xs" src="img/default-icon.jpg" />
+        </div>
+
+        <div class="summary col-md-6">
+                <!-- <input type="text" id="names"></input> -->
+                <span id="firstName"></span>
+                <span id="lastName"></span>
+                <p id="email"></p>
+                <input type="image" src="img/edit.png" name="edit" value="edit" class="edit" id="edit-summary"></input>
+
+            </div>
+        </div>
+      </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
+  <script src="js/endpoints.js"></script>
+  <script>
+
+    get(api(decodeuserparam()).getUser.endpoint, function (data) {
+      getUser(data)
+      console.log(data)
+      // document.getElementById("firstName").innerHTML = data["firstName"]
+      // document.getElementById("lastName").innerHTML = data["lastName"]
+      document.getElementById("email").innerHTML = data["email"]
+      document.getElementById('edit-summary').addEventListener('click', function () {
+        let input = document.createElement('input');
+      //  input.value = data['firstName'] + data['lastName'];
+        document.querySelector('.summary').appendChild(input);
+      })
+    })
+
+    let selectors = {
+      //editAcademic: document.getElementById('edit-academic'),
+     // academicArea: document.getElementById('academic-area')
+    }
+    /*
+        window.addEventListener('load', function () {
+          document.getElementById('academic-area').style.border = 'none';
+        })
+        */
+
+    let elements = {
+      /*
+      firstInput: {
+        selector: selectors.editAcademic,
+        events: {
+          "click": [
+            function addBorder(event) {
+              event.preventDefault()
+              //selectors.academicArea.style.border = "1px solid black"
+              //selectors.academicArea.focus()
+            }
+          ]
+        }
+      },*/
+      windowObj: {
+        selector: window,
+        events: {
+          "load": [
+            function removeScrollbar() {
+              //document.getElementById('academic-area').style.overflow = 'hidden';
+            }/*,
+            function removeBoxshadow() {
+              if (selectors.academicArea.value.trim() == "") {
+                selectors.academicArea.style.boxShadow = "20px";
+              }
+              else {
+                selectors.academicArea.style.boxShadow = "none";
+              }
+            }*/
+          ]
+        }
+      }/*,
+      academicField: {
+        selector: selectors.academicArea,
+        events: {
+          keydown: [
+            function addShadow() {
+              //selectors.academicArea.style.boxShadow = "10px";
+            }
+          ]
+        }
+      }*/
+    }
+    initListeners()
+  </script>
+</body>
+
+</html>

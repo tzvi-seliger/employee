@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="banner.css" />
+    <link rel="stylesheet" href="usersearch.css" />
+    <style>
+        .half{
+    width: 49%;
+    height: 100%;
+    display: inline-block;
+    /* border: 1px solid black; */
+}
+
+        .third{
+        position: fixed;
+        top: 18%;
+        left: 2%;
+        width: 15%;
+        height: 50%;
+
+     display: inline-block;
+    border: 1px solid rgb(243, 185, 185);
+    word-wrap: break-word;
+    padding: 2%;
+    font-size: .8em;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6em;
+    letter-spacing:.05em ;
+}
+.twothird{
+    position: absolute;
+    left: 25%;
+    width: 70%;
+    height: 100%;
+    display: inline-block;
+    text-align: center;
+    /* border: 1px solid black; */
+}
+#feedheader{
+    font-family: Arial, Helvetica, sans-serif;
+        width: 100%;
+        padding: 2%;
+     display: inline-block;
+    border: 1px solid rgb(243, 185, 185);
+    word-wrap: break-word;
+    padding: 2%;
+    font-size: 1.4em;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6em;
+    font-weight: bold;
+    letter-spacing:.05em ;
+    margin-bottom: 3%;
+}
+
+.blogpost{
+    font-family: Arial, Helvetica, sans-serif;
+        width: 100%;
+        min-height: 20%;
+        padding: 2%;
+     display: inline-block;
+    border: 1px solid rgb(243, 185, 185);
+    word-wrap: break-word;
+    font-size: .8em;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .1);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6em;
+    letter-spacing:.05em ;
+    margin-bottom: 3%;
+}
+.postheader{
+    font-family: Arial, Helvetica, sans-serif;
+        width: 100%;
+    word-wrap: break-word;
+    font-size: 1.2em;
+    line-height: 1.6em;
+    font-weight: bold;
+
+    letter-spacing:.05em ;
+    margin-bottom: 2%;
+}
+        #searchtoggle {
+            height: 100%;
+            color: purple;
+            background: white;
+            width: 10%;
+            float: right;
+        }
+
+        #pic img{
+            border-radius: 100%;
+            width: 100%;
+        }
+        button{
+            background: black;
+            color: white;
+            height: 25%;
+            width: 30%;
+        }
+        #newpost{
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <div id="logo">
+            <a href="landing.html">
+                <img id="logoimg" src="https://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5a2857720d9297ab4724efd5/1555346130603/?format=1500w" />
+            </a>
+        </div>
+        <div id="loginform">
+            <form>
+                <input id="username" type="text" placeholder="username">
+                <input id="password" type="password" placeholder="password">
+                <div id="validate">Validate</div>
+            </form>
+        </div>
+    </div>
+
+    <div id="body">
+        <div class="third">
+            <div id="profile">
+                <div id="pic"></div>
+                <div id = "resume"></div>
+                <p id="email"></p>
+            </div>
+            <div id="editformcontainer">
+                <form id="editform">
+                </form>
+            </div>
+        </div>
+        <div class="twothird">
+            <h1 id="feedheader">Feed</h1>
+            <div class="blogpost">
+                <h1 class="postheader">Whats on my mind</h1>
+            </div>
+            <div class="blogpost"></div>
+            <div class="blogpost"></div>
+            <div class="blogpost"></div>
+            <div class="blogpost"></div>
+            <div class="blogpost"></div>
+            <div class="blogpost"></div>
+            <div class="blogpost"></div>
+            <div class="blogpost"></div>
+            <div class="newblog blogpost">
+                <textarea id="newpost"></textarea>
+                <button>Post</button>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script src="js/main.js"></script>
+    <script src="js/endpoints.js"></script>
+    <!-- <script src="usersearch.js"></script> -->
+    <script>
+        function put(endpoint, formID, func) {
+            let formData = new FormData(document.getElementById(formID));
+            fetch(endpoint, {
+                body: formData,
+                method: "PUT"
+            }).then(function (response) {
+                console.log(response)
+            }).then(function (data) {
+                if (func) func(data)
+            })
+        }
+        /*
+        function edit() {
+            put(api().updateUser.endpoint)
+
+        }
+        */
+        get(api(decodeuserparam()).getUser.endpoint, function (data) {
+            console.log(data)
+            if (data["acctType"] == 0) console.log("student")
+            if (data["acctType"] == 1) console.log(1)
+            if (data["acctType"] == 2) console.log(2)
+            if (data["acctType"] == 3) console.log(3)
+            document.getElementById("email").innerHTML = data["email"] + "<br>"
+            // //document.getElementById("profile").innerHTML += data["acctType"] + "<br>"
+            // //document.getElementById("profile").innerHTML += data["cohortID"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["description"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["email"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["firstName"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["header"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["homePhone"] + "<br>"
+            // //document.getElementById("profile").innerHTML += data["institutionList"] + "<br>"
+            // //document.getElementById("profile").innerHTML += data["invitationCode"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["lastName"] + "<br>"
+            // //document.getElementById("profile").innerHTML += data["password"] + "<br>"
+            // // document.getElementById("profile").innerHTML += data["profileImage"] + "<br>"
+            // //document.getElementById("profile").innerHTML += data["projectList"] + "<br>"
+            // //document.getElementById("profile").innerHTML += data["salt"] + "<br>"
+            // //document.getElementById("profile").innerHTML += data["skillsList"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["userCohort"]["cohortID"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["cohortID"]["location"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["cohortID"]["season"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["cohortID"]["startDate"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["cohortID"]["endDate"] + "<br>"
+            // //document.getElementById("profile").innerHTML += data["userID"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["username"] + "<br>"
+            // document.getElementById("profile").innerHTML += data["views"] + "<br>"
+            console.log(data["imagePath"])
+            let image = document.createElement('img')
+            image.src = `${data["imagePath"]}`
+            elID("pic").appendChild(image)
+        })
+/*
+                let elements = {
+                    windowObj: {
+                        selector: window,
+                        events: {
+                            "load": [
+                                function removeScrollbar() {
+                                }
+                            ]
+                        }
+                    },
+                    searchToggle: {
+                        selector: document.getElementById("searchtoggle"),
+                        events: {
+                            "click": [
+                                function () {
+                                    document.getElementById("body").innerHTML = `
+                                <a href="landing.html">Home</a> <table id="table"></table>`
+                                },
+                                function () {
+                                    document.getElementById("body").background = "white";
+                                    let filteredusername
+                                    let filteredlastname
+        
+                                    let filter = function (data) {
+                                        filteredusername = UsersSearchUpdated(data, "username", "searchusername")
+                                        filteredfirstname = UsersSearchUpdated(filteredusername, "firstName", "searchfirstname")
+                                        filteredlastname = UsersSearchUpdated(filteredfirstname, "lastName", "searchlastname")
+                                        filteredemail = UsersSearchUpdated(filteredlastname, "email", "searchemail")
+                                        //filteredheader = UsersSearchUpdated(filteredemail, "header", "searchheader")
+                                        //filteredhomephone = UsersSearchUpdated(filteredheader, "homePhone", "searchhomephone")
+                                        filteredhomephone = UsersSearchUpdated(filteredemail, "homePhone", "searchhomephone")
+                                        filteredcellphone = UsersSearchUpdated(filteredhomephone, "cellPhone", "searchcellphone")
+                                        filtereddescription = UsersSearchUpdated(filteredcellphone, "description", "searchdescription")
+                                        return filteredemail
+                                    }
+        
+                                    function header(id, row, text) {
+                                        let input = document.createElement("input")
+                                        let th = document.createElement("th")
+                                        // let label = document.createElement("label")
+                                        // label.innerHTML = text
+                                        input.setAttribute("id", id)
+                                        input.setAttribute("placeholder", text)
+                                        th.setAttribute("class", "item")
+                                        //th.appendChild(label)
+                                        th.appendChild(input)
+                                        row.appendChild(th)
+                                    }
+        
+                                    function appendfirst() {
+                                        let tr = document.createElement("tr")
+                                        let thead = document.createElement("thead")
+        
+                                        header("searchusername", tr, "User Name");
+                                        header("searchfirstname", tr, "First Name");
+                                        header("searchlastname", tr, "Last Name");
+                                        header("searchemail", tr, "Email");
+                                        //header("searchheader", tr, "Header");
+                                        header("searchhomephone", tr, "Home");
+                                        header("searchcellphone", tr, "Cell");
+                                        header("searchdescription", tr, "Description");
+                                        header("searchcohortlocation", tr, "Location");
+                                        header("searchcohortseason", tr, "Season");
+                                        header("searchcohortstartdate", tr, "Start");
+                                        header("searchcohortenddate", tr, "End");
+        
+                                        thead.appendChild(tr)
+                                        elID("table").appendChild(thead)
+        
+                                    }
+                                    (function () {
+                                        let tbody
+                                        appendfirst()
+                                    }())
+        
+                                    function cell(field, row, element) {
+                                        let td = document.createElement("td")
+                                        td.setAttribute("class", "item")
+                                        td.innerHTML = element[field]
+                                        row.appendChild(td)
+                                    }
+        
+                                    let display = function (arr) {
+                                        if (document.getElementById("table").querySelector("tbody")) {
+                                            document.getElementById("table").querySelector("tbody").innerHTML = ""
+                                        } else {
+                                            tbody = document.createElement("tbody")
+                                        }
+        
+                                        let tr, td
+        
+                                        arr.forEach(element => {
+                                            tr = document.createElement("tr")
+        
+                                            cell("username", tr, element)
+                                            cell("firstName", tr, element)
+                                            cell("lastName", tr, element)
+                                            cell("email", tr, element)
+                                            //cell("header", tr, element)
+                                            cell("homePhone", tr, element)
+                                            cell("cellPhone", tr, element)
+                                            cell("description", tr, element)
+        
+                                            tbody.appendChild(tr)
+                                        });
+                                        elID("table").appendChild(tbody)
+                                    }
+        
+                                    function listen(id) {
+                                        document.getElementById(id).addEventListener("keydown", function () {
+                                            get(api().getUsers.endpoint, function (data) {
+                                                console.log(filter(data))
+                                                display(filter(data))
+                                            })
+                                        })
+                                    }
+                                    (function () {
+                                        listen("searchusername")
+                                        listen("searchfirstname")
+                                        listen("searchlastname")
+                                        listen("searchemail")
+                                        listen("searchheader")
+                                        listen("searchhomephone")
+                                        listen("searchcellphone")
+                                        listen("searchdescription")
+                                    }())
+                                }
+                            ]
+                        }
+                    }
+                }
+                initListeners()
+                */
+    </script>
+</body>
+
+</html>

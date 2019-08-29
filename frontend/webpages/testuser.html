@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+    <a href="landing.html">Home</a>
+    <table id="users">
+
+    </table>
+    <div id="first_name"></div>
+    <div id="last_name"></div>
+    <div id="email"></div>
+    <div id="homephone"></div>
+    <div id="username"></div>
+    <div id="password"></div>
+    <div id="salt"></div>
+    <div id="userID"></div>
+    <div id="cohortID"></div>
+    <div id="acctType"></div>
+    <a href="testusers.html">See all users</a>
+
+    <br>
+    <script src="main.js"></script>
+    <script src="js/endpoints.js"></script>
+    <script>
+        get(api(decodeuserparam()).getUser.endpoint, function (data) {
+            getUser(data)
+        })        //resume/linked in /contactinformation
+        //github bitbucket page
+        //monday time is 11am
+    </script>
+</body>
+
+</html>

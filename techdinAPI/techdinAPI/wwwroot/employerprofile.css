@@ -1,0 +1,109 @@
+.company {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    margin: auto;
+}
+
+.emp-image {
+    display: block;
+    width: 30%;
+    padding: 0px 20px 20px 15px;
+    height: 60%;
+}
+
+#company-info {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 0px 30px;
+    width: 60%;
+    height: 60%;
+    margin: 0 10% 0 0;
+}
+
+#searchtoggle {
+    height: 100%;
+    color: purple;
+    background: white;
+    width: 10%;
+    /* display: flex;
+flex-direction: column;
+align-items: flex-start; */
+    vertical-align: bottom;
+    margin: 15px 0px 0px 15px;
+}
+
+#website {
+    color: black;
+    font-size: 1.1em;
+    display: inline;
+    font-family: Heebo;
+}
+
+#website-title {
+    font-weight: bold;
+    font-family: Heebo;
+    font-size: 1.1em;
+    /* display: inline; */
+    margin-bottom: 5px;
+}
+
+#linkedin-title {
+    font-weight: bold;
+    font-family: Heebo;
+    font-size: 1.1em;
+    /* display: inline; */
+    margin-bottom: 5px;
+}
+
+#linkedin-link {
+    font-family: Heebo;
+    color: black;
+    font-size: 1.1em;
+    display: inline;
+}
+
+#company-title {
+    font-weight: bold;
+    font-family: Heebo;
+    font-size: 1.6em;
+}
+
+#company-name {
+    font-weight: bold;
+    font-family: Raleway;
+    font-size: 1.5em;
+}
+
+#contact-title {
+    font-family: Heebo;
+    list-style: none;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: Heebo;
+    font-size: 1.1em;
+    /* display: inline; */
+    margin: 5px 0px 5px 0px;
+}
+
+#email {
+    color: black;
+    font-size: 1em;
+    /* display: inline; */
+    margin-bottom: 5px;
+}
+
+#description {
+    font-family: Heebo;
+    color: black;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+#company-description {
+    color: black;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}

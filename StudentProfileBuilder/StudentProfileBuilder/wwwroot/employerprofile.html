@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="banner.css" />
+    <link rel="stylesheet" href="usersearch.css" />
+    <link rel="stylesheet" href="employerprofile.css" />
+
+</head>
+
+<body>
+        <div id="header">
+                <div id="logo">
+                    <a href="landing.html">
+                        <img id="logoimg" src="https://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5a2857720d9297ab4724efd5/1555346130603/?format=1500w" />
+                    </a>
+                </div>
+                <div id="loginform">
+                    <form>
+                        <input id="username" type="text" placeholder="username">
+                        <input id="password" type="password" placeholder="password">
+                        <div id="validate">Validate</div>
+                    </form>
+                </div>
+            </div>
+
+    <div id="body">
+        <div class="employer">
+            <div class="company">
+                    <div id="company-logo">
+                            <img class="prof-image img-responsive hidden-xs" src="img/bnysquare.png" />
+                    </div>
+            <section id="company-info">
+                <div>
+                        <span id="company-name">BNY Mellon</span></div> <br>
+                        <a href="https://www.bnymellon.com/us/en/home.jsp" target="_blank" id="website">www.bnymellon.com</a> <br>
+                        <span id="email">blahblahblah<span> <br>
+                    <div> <a href="http://www.linkedin.com/company/bny-mellon" target="_blank" id="linkedin" data-linkloc="footer" aria-label="View BNY LinkedIn page" rel="noopener">
+                    <i class="i-linkedin2 i-sm">www.linkedin.com/company/bny-mellon</i> 
+                    </a></div>
+                    <!-- <div>
+                <input type="image" src="img/edit.png" name="edit" value="edit" class="edit" id="edit-summary"></input> </div> -->
+            </div>
+        </section>
+        </div>
+        <section id="searchtable">
+        <div id="searchtoggle">
+                <form id="searchStudents">
+            
+                        <label>Search Students</label>
+                        <input id="searchStudent" type="text" name = "studentName">                 
+                       <!-- <div id="searchButton">Search</div> -->
+                </form>
+            </div>
+        </section>
+        <div>
+
+        </div>
+      
+    </div>
+    <script src="js/main.js"></script>
+    <script src="js/endpoints.js"></script>
+    <script src="usersearch.js"></script>
+    <script>
+
+        get(api(decodeuserparam()).getUser.endpoint, function (data) {
+            getUser(data)
+            console.log(data)
+            document.getElementById("email").innerHTML = data["email"]
+            document.getElementById('edit-summary').addEventListener('click', function () {
+                let input = document.createElement('input');
+                document.querySelector('.summary').appendChild(input);
+            })
+        })
+
+        let selectors = {
+
+        }
+
+
+        let elements = {
+            windowObj: {
+                selector: window,
+                events: {
+                    "load": [
+                        function removeScrollbar() {
+                        }
+                    ]
+                }
+            },
+            searchToggle: {
+                selector: document.getElementById("searchtoggle"),
+                events: {
+                    "click": [
+                        function () {
+                            document.getElementById("searchtable").innerHTML = `
+                        <a href="landing.html">Home</a> <table id="table"></table>`
+                        },
+                        function () {
+                            document.getElementById("searchtable").background = "white";
+                            let filteredusername
+                            let filteredlastname
+
+                            let filter = function (data) {
+                                filteredusername = UsersSearchUpdated(data, "username", "searchusername")
+                                filteredfirstname = UsersSearchUpdated(filteredusername, "firstName", "searchfirstname")
+                                filteredlastname = UsersSearchUpdated(filteredfirstname, "lastName", "searchlastname")
+                                filteredemail = UsersSearchUpdated(filteredlastname, "email", "searchemail")
+                                //filteredheader = UsersSearchUpdated(filteredemail, "header", "searchheader")
+                                //filteredhomephone = UsersSearchUpdated(filteredheader, "homePhone", "searchhomephone")
+                                filteredhomephone = UsersSearchUpdated(filteredemail, "homePhone", "searchhomephone")
+                                filteredcellphone = UsersSearchUpdated(filteredhomephone, "cellPhone", "searchcellphone")
+                                filtereddescription = UsersSearchUpdated(filteredcellphone, "description", "searchdescription")
+                                return filteredemail
+                            }
+
+                            function header(id, row, text) {
+                                let input = document.createElement("input")
+                                let th = document.createElement("th")
+                                // let label = document.createElement("label")
+                                // label.innerHTML = text
+                                input.setAttribute("id", id)
+                                input.setAttribute("placeholder", text)
+                                th.setAttribute("class", "item")
+                                //th.appendChild(label)
+                                th.appendChild(input)
+                                row.appendChild(th)
+                            }
+
+                            function appendfirst() {
+                                let tr = document.createElement("tr")
+                                let thead = document.createElement("thead")
+
+                                header("searchusername", tr, "User Name");
+                                header("searchfirstname", tr, "First Name");
+                                header("searchlastname", tr, "Last Name");
+                                header("searchemail", tr, "Email");
+                                //header("searchheader", tr, "Header");
+                                header("searchhomephone", tr, "Home");
+                                header("searchcellphone", tr, "Cell");
+                                header("searchdescription", tr, "Description");
+                                header("searchcohortlocation", tr, "Location");
+                                header("searchcohortseason", tr, "Season");
+                                header("searchcohortstartdate", tr, "Start");
+                                header("searchcohortenddate", tr, "End");
+
+                                thead.appendChild(tr)
+                                elID("table").appendChild(thead)
+
+                            }
+                            (function () {
+                                let tbody
+                                appendfirst()
+                            }())
+
+                            function cell(field, row, element) {
+                                let td = document.createElement("td")
+                                td.setAttribute("class", "item")
+                                td.innerHTML = element[field]
+                                row.appendChild(td)
+                            }
+
+                            let display = function (arr) {
+                                if (document.getElementById("table").querySelector("tbody")) {
+                                    document.getElementById("table").querySelector("tbody").innerHTML = ""
+                                } else {
+                                    tbody = document.createElement("tbody")
+                                }
+
+                                let tr, td
+
+                                arr.forEach(element => {
+                                    tr = document.createElement("tr")
+
+                                    cell("username", tr, element)
+                                    cell("firstName", tr, element)
+                                    cell("lastName", tr, element)
+                                    cell("email", tr, element)
+                                    //cell("header", tr, element)
+                                    cell("homePhone", tr, element)
+                                    cell("cellPhone", tr, element)
+                                    cell("description", tr, element)
+
+                                    tbody.appendChild(tr)
+                                });
+                                elID("table").appendChild(tbody)
+                            }
+
+                            function listen(id) {
+                                document.getElementById(id).addEventListener("keydown", function () {
+                                    get(api().getUsers.endpoint, function (data) {
+                                        console.log(filter(data))
+                                        display(filter(data))
+                                    })
+                                })
+                            }
+                            (function () {
+                                listen("searchusername")
+                                listen("searchfirstname")
+                                listen("searchlastname")
+                                listen("searchemail")
+                                listen("searchheader")
+                                listen("searchhomephone")
+                                listen("searchcellphone")
+                                listen("searchdescription")
+                            }())
+                        }
+                    ]
+                }
+            }
+        }
+        initListeners()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+.company {
+    display:flex;
+    flex-direction: row;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+#company-logo {
+    padding: 0px 0px 0px 20px;
+    margin: 0 10%;
+    /* min-width: 300px;
+    max-width: 300px; */
+    width: 90%;
+    display:flex;
+    flex-direction: row;
+}
+
+#company-info {
+    text-align: center;
+    padding: 10px 0px 0px 30px;
+    width: 30%;
+    height: 400px;
+    margin: 0 10% 0 0;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#searchtoggle {
+    height: 100%;
+    color: purple;
+    background: white;
+    width: 10%;
+    float: left;
+}
+
+#website {
+    color: black;
+    font-size: 1.3em;
+}
+
+#linkedin {
+    width: 30%;
+}

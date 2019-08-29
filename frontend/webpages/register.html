@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="banner.css" />
+
+    <style>
+        #createuserbutton {
+            border: 1px solid black;
+        }
+
+        .row{
+            border: none;
+            padding-top: 1%;
+            display: block;
+            padding-left: 4%;
+            padding-right: 4%;
+        }
+        .rowitem{
+            padding-left: 1%;
+            display: inline-block;
+        }
+         label, input{
+            margin: 1%;
+            display: inline-block;
+        }
+
+        #registerbody{
+            padding-top: 7%;
+            width: 100%;
+            margin: auto;
+            padding-left: 30%;
+            padding-right: 20%;
+        }
+        .error{
+            height: 3%;
+            width: 100%;
+        }
+        *{
+            vertical-align: top;
+            border: none;
+        }
+    </style>
+</head>
+
+    <div id="header">
+        <div id="logo">
+            <a href="landing.html">
+                <img id="logoimg" src="https://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5a2857720d9297ab4724efd5/1555346130603/?format=1500w" />
+            </a>
+        </div>
+        <div id="loginform">
+            <form>
+                <input id="username1" type="text" placeholder="username">
+                <input id="password1" type="password" placeholder="password">
+                <div id="validate">Validate</div>
+            </form>
+        </div>
+    </div>
+
+    <div id = "registerbody">
+    <form id="create_user_form">
+
+        <div class="row">
+            <div class="rowitem">
+                <input id="first_name" name="firstName" type="text" placeholder="firstName">
+                <p id="fn_error" class ="error">&nbsp</p>
+            </div>
+            <div class="rowitem">
+                <input id="last_name" type="text" name="lastName" placeholder="lastName">
+                <p id="ln_error" class ="error">&nbsp</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowitem">
+                <input id="user_name" type="text" name="username" placeholder="username">
+                <p id="un_error" class ="error">&nbsp</p>
+            </div>
+            <div class="rowitem">
+                <input id="password" type="text" name="password" placeholder="password">
+                <p id="pw_error" class ="error">&nbsp</p>
+            </div>
+            <div class="rowitem">
+                <input id="confirm_password" type="text" name="confirm_password" placeholder="confirm_password">
+                <p id="cp_error"  class ="error">&nbsp</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowitem">
+                <input id="email" type="email" name="email" placeholder="email">
+                <p id="email_error" class ="error">&nbsp</p>
+            </div>
+            <div class="rowitem">
+                <input id="confirm_email" type="text" name="confirm_email" placeholder="confirm_email">
+                <p id="cemail_error" class ="error">&nbsp</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowitem">
+                <input type="text" name="homephone" placeholder="homephone">
+                <p id="homephone_error" class ="error">&nbsp</p>
+            </div>
+            <div class="rowitem">
+                <input type="text" name="cellphone" placeholder="cellphone">
+                <p id="cellphone_error" class ="error">&nbsp</p>
+                <p></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="rowitem">
+                <input type="text" name="cohortID" placeholder="cohortID">
+                <p id="cohortID_error" class ="error">&nbsp</p>
+            </div>
+            <p></p>
+            <div class="rowitem">
+                <select id="accnt_type" name="accnttype" placeholder="accnttype">
+                    <option>Student</option>
+                    <option>Employer</option>
+                    <option>Staff</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowitem">
+                <label>Invitation Code</label>
+                <input id="InvitationCode" name="InvitationCode" type="text" placeholder="InvitationCode">
+            </div>
+            <div class="rowitem">
+                <label>LinkedIn</label>
+                <input id="LinkedIn" name="LinkedIn" type="text" placeholder="LinkedIn">
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowitem">
+                <div id="createuserbutton">Create Account</div>
+                <!-- <div id="getuserdata">Get User Data</div> -->
+            </div>
+        </div>
+    </form>
+
+    <form enctype='multipart/form-data' id = "picform">
+        <input type="file" name='files'>
+        <input type="text" name='username'>
+    </form>
+
+    <form enctype='multipart/form-data' id = "resumeform">
+        <input type="file" name='files'>
+        <input type="text" name='username'>
+    </form>
+
+</div>
+    <script src="js/main.js"></script>
+    <script>
+        registerjs()
+    </script>
+</body>
+
+</html>

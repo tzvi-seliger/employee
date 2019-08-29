@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="banner.css" />
+    <script src="js/login.js"></script>
+    <script src="js/register.js"></script>
+
+
+    <style>
+        #createuserbutton {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <div id="logo">
+            <a href="landing.html">
+                <img id="logoimg" src="https://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5a2857720d9297ab4724efd5/1555346130603/?format=1500w" />
+            </a>
+        </div>
+        <div id="loginform">
+            <form id="loginformform">
+                <input id="username" type="text" placeholder="username" name="username">
+                <input id="password" type="password" placeholder="password" name="password">
+                <div id="validate">Login</div>
+                <div id="errormsg"></div>
+            </form>
+        </div>
+    </div>
+    <form id="create_user_form">
+        <label>Email</label>
+        <input id="email" type="email" name="email">
+        <p id="email_error"></p>
+
+        <label>Invitation Code</label>
+        <input id="InvitationCode" name="InvitationCode" type="text">
+
+        <label>UserName</label>
+        <input id="user_name" type="text" name="username">
+        <p id="un_error"></p>
+
+        <label>First Name</label>
+        <input id="first_name" name="firstName" type="text">
+        <p id="fn_error"></p>
+
+        <label>Last Name</label>
+        <input id="last_name" type="text" name="lastName">
+        <p id="ln_error"></p>
+
+        <label>Password</label>
+        <input id="password" type="password" name="password">
+        <p id="pw_error"></p>
+
+        <label>Confirm Password</label>
+        <input id="confirm_password" type="password" name="confirm_password">
+        <p id="cp_error"></p>
+
+        <div id="submit">
+            <div id="createuserbutton">
+                Submit
+            </div>
+        </div>
+        <div id="invalidMsg"></div>
+        <!-- <div id="getuserdata">Get User Data</div> -->
+
+    </form>
+
+    <!-- <form enctype='multipart/form-data' action="https://localhost:44358/api/files" method="POST">
+        <input type="file" name='files'>
+        <input type="text" name='username'>
+        <button>SUBMIT</button>
+    </form> -->
+
+    <div id="log"></div>
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/banner.css" />
+    <link rel="stylesheet" href="../css/landing.css" />
+
+</head>
+<style>
+    #profiles, #body, html, body{
+        width: 100%;
+        height: 100%;
+    }
+    .fifth{
+            width: 20%;
+            height: 40%;
+            display: inline-block;
+            border-radius: 100%;
+            margin: 1.5%;
+            padding: 1%;
+            vertical-align: top;
+            position: relative;
+            cursor: pointer;
+
+        }
+
+        .fifth img {
+            width: 100%;
+            border-radius: 100%;
+            z-index: 0;
+        }
+
+        .infooverlay{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;  /* position the top  edge of the element at the middle of the parent */
+            left: 0; /* position the left edge of the element at the middle of the parent */
+            transform: translate(30%, 80%); /* This is a shorthand of */
+            color: black;
+            border-radius: 100%;
+            font-family:cursive;
+            font-size: 1em;
+            z-index: 2;
+        }
+        .overlay{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;  /* position the top  edge of the element at the middle of the parent */
+            left: 0; /* position the left edge of the element at the middle of the parent */
+            bottom:0;
+            right: 0;
+            background: white;
+            border-radius: 100%;
+            opacity: .7;
+            z-index: 1;
+        }
+        .overlay:hover{
+            opacity: .3;
+        }
+      
+</style>
+
+<body>
+    <div id="header">
+
+        <div id="logo" class="divinline">
+            <a href="landing.html">
+                <img id="logoimg" src="https://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5a2857720d9297ab4724efd5/1555346130603/?format=1500w" />
+            </a>
+        </div>
+
+        <div id="right" class="divinline">
+            <div id="loginform" class="divinline">
+                <form>
+                    <input id="loginusername" type="text" placeholder="username" class="divinline">
+                    <input id="loginpassword" type="password" placeholder="password" class="divinline">
+                    <div id="validate">login</div>
+                </form>
+            </div>
+
+            <div id="registercontainer" class="fonttheme1 nixdecoration divinline">
+                <a href="register.html" class="nixdecoration">Got an Invitation? Register Now!</a>
+            </div>
+        </div>
+
+    </div>
+    <!-- <div id="intro"></div> -->
+
+    <div id="body">
+        <div id="table"></div>
+        <div id="profiles"></div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/endpoints.js"></script>
+    <script src="../js/login.js"></script>
+
+    <script>
+        // let elements = { 
+        //     validateLogin: {
+        //         selector: elID("validate"),
+        //         events: {
+        //             click: [
+        //             ]
+        //         }
+        //     }
+        // }
+        let filteredusername
+        let filteredlastname
+        get(api().getUsers.endpoint, function (data) {
+            for (item in filter(data)) {
+                appendProfile(data, item)
+            }
+        })
+        function returnFiltered() {
+            elID("profiles").innerHTML = ""
+            get(api().getUsers.endpoint, function (data) {
+                for (item in filter(data)) {
+                    appendProfile(data, item)
+                }
+            })
+        }
+
+        let filter = function (data) {
+            filteredusername = UsersSearchUpdated(data, "username", "searchusername")
+            return filteredusername
+        }
+
+        function header(id, row, text) {
+            let input = document.createElement("input")
+            let magnify = document.createElement("img")
+            magnify.src = "https://as1.ftcdn.net/jpg/01/95/07/40/500_F_195074069_mtJGS0T6d0dDn6Xh1ybcMthjdsR0iykL.jpg"
+            magnify.style.width = "10%"
+            magnify.style.padding = "5%"
+            let th = document.createElement("th")
+            // let label = document.createElement("label")
+            // label.innerHTML = text
+            input.setAttribute("id", id)
+            input.setAttribute("class", "header")
+            input.setAttribute("placeholder", text)
+            input.appendChild(magnify)
+            th.setAttribute("class", "item")
+            //th.appendChild(label)
+            th.appendChild(input)
+            row.appendChild(th)
+        }
+
+        function appendfirst() {
+            let tr = document.createElement("tr")
+            let thead = document.createElement("thead")
+
+            header("searchusername", tr, "User Name");
+
+            thead.appendChild(tr)
+            elID("table").appendChild(thead)
+
+        }
+
+        function cell(field, row, element) {
+            let td = document.createElement("td")
+            td.setAttribute("class", "item")
+            td.innerHTML = element[field]
+            row.appendChild(td)
+        }
+
+        let display = function (arr) {
+            if (document.getElementById("table").querySelector("tbody")) {
+                document.getElementById("table").querySelector("tbody").innerHTML = ""
+            } else {
+                tbody = document.createElement("tbody")
+            }
+
+            let tr, td
+
+            arr.forEach(element => {
+                tr = document.createElement("tr")
+
+                cell("username", tr, element)
+                cell("firstName", tr, element)
+                cell("lastName", tr, element)
+                cell("email", tr, element)
+                //cell("header", tr, element)
+                cell("homePhone", tr, element)
+                cell("cellPhone", tr, element)
+                cell("description", tr, element)
+
+                tbody.appendChild(tr)
+            });
+            elID("table").appendChild(tbody)
+        }
+        function listen(id) {
+            document.getElementById(id).addEventListener("keydown", function () {
+                returnFiltered()
+            })
+        }
+
+        (function () {
+            let tbody
+            appendfirst()
+            listen("searchusername")
+        }())
+
+        // window.addEventListener("scroll", function () {
+        //     console.log(document.getElementById("intro"))
+        //     setTimeout(function () {
+        //         if(parseInt(document.getElementById("intro").size) > 0)
+        //         document.getElementById("intro").style.width = parseInt(document.getElementById("intro").size) -1 + "px"
+        //     }, 2)
+
+        // })
+
+    </script>
+</body>
+
+</html>

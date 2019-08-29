@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel ="stylesheet" href ="../css/reset.css">
+    <link rel ="stylesheet" href ="../css/banner.css">
+    <link rel ="stylesheet" href ="../css/admin.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+</head>
+
+<body>
+        <div id="header">
+
+                <div id="logo" class="divinline">
+                    <a href="landing.html">
+                        <img id="logoimg" src="https://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5a2857720d9297ab4724efd5/1555346130603/?format=1500w" />
+                    </a>
+                </div>
+        
+                <div id="right" class="divinline">
+                    <div id="loginform" class="divinline">
+                        <form>
+                            <input id="loginusername" type="text" placeholder="username" class="divinline">
+                            <input id="loginpassword" type="password" placeholder="password" class="divinline">
+                            <div id="validate">login</div>
+                        </form>
+                    </div>
+        
+                    <div id="registercontainer" class="fonttheme1 nixdecoration divinline">
+                        <a href="register.html" class="nixdecoration">Got an Invitation? Register Now!</a>
+                    </div>
+                </div>
+        
+            </div>
+    <!-- <form action="https://localhost:44358/api/invitations" method="POST"> -->
+    <div id="inviteContainer">
+    <form id="invite">
+        <label>Submit New Email</label>
+        <input type="email" name="email" id="emailtext">
+        <p id="emailerror"></p>
+    </form>
+    <div id="submit">
+        <div id="submitButton">
+            Submit
+        </div>
+        </div>
+        <script src="../js/main.js"></script>
+        <script src="../js/endpoints.js"></script>
+        <script src="../js/admin.js"></script>
+        <script>
+
+            var adminelements = {
+                submitEmail: {
+                    selector: elID("submit"),
+                    conditions: {
+                        inputLength: function () { return elID("emailtext").value.length > 10 }
+                    },
+                    events: {
+                        "click": [
+                            function () {
+                                if (adminelements.submitEmail.conditions.inputLength()) {
+                                    console.log("good length")
+                                    elID("emailtext").style.border = "2px solid black"
+                                    elID("emailerror").innerHTML = "Thanks for submitting<br>." +
+                                        "An email has been sent with an invitation link "
+                                    elID("emailerror").style.color = "green"
+
+                                } else {
+                                    console.log("not long enough")
+                                    elID("emailtext").style.border = "2px solid red"
+                                    elID("emailerror").innerHTML = "not long enough"
+                                    elID("emailerror").style.color = "red"
+                                }
+                            },
+                            function () {
+                                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(elID("emailtext").value)) {
+                                    console.log("good length")
+                                    elID("emailtext").style.border = "2px solid black"
+                                    elID("emailerror").innerHTML = "Thanks for submitting<br>." +
+                                        "An email has been sent with an invitation link "
+                                    elID("emailerror").style.color = "green"
+
+                                } else {
+                                    console.log("not long enough")
+                                    elID("emailtext").style.border = "2px solid red"
+                                    elID("emailerror").innerHTML += "invalid email address"
+                                    elID("emailerror").style.color = "red"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+
+            function initListeners() {
+                for (element in adminelements) {
+                    for (event in adminelements[element].events) {
+                        adminelements[element].events[event].forEach(function (item) {
+                            addEvent(event, adminelements[element].selector, item)
+                        })
+                    }
+                }
+            }
+
+            initListeners()
+
+        </script>
+</body>
+
+</html>

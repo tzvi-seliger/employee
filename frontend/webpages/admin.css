@@ -1,0 +1,38 @@
+body{
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #e1f1f7;
+}
+
+#emailtext{
+    padding-left: 10px;
+    text-align: left;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#invite label{
+    padding-right: 10px;
+}
+
+#inviteContainer{
+    display: inline-block;
+    margin-top: 40px;
+    margin-left: 20px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 7px;
+    background-color: #00afef;
+}
+
+
+#submit{
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 8px;
+    background-color: #84d8f7;
+}
+#submit:hover{
+    cursor: pointer;
+}

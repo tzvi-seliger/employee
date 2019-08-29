@@ -1,0 +1,12 @@
+#logout {
+    padding: 4px;
+    display: inline-block;
+    background-color: #abd7df;
+    border-radius: 2px;
+    border: 1px solid black;
+}
+
+#logout:hover{
+    cursor: pointer;
+    background-color: #c2e3e9;
+}

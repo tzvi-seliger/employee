@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <link rel="stylesheet" href="banner.css">
+    <link rel="stylesheet" href="reset.css">
+    <style>
+
+        .header{
+            margin-bottom: .5%;
+            padding-bottom: .5%;
+        }
+        th{
+            height: 100%;
+        }
+        table
+        {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            font-size: 1em;
+        }
+
+        td{
+            border: none;
+            width: 12%;
+            height: 2em;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+        input {
+            margin: 2%;
+        }
+        th input{
+            padding: 1%;
+            margin: auto;
+            border: 1px solid green;
+        }
+        tr{
+            height:20%;
+            margin-bottom: 10%;
+            padding-bottom: 3%;
+            border-bottom: 1px solid green;
+        }
+
+        .item {
+            display: inline-block;
+            /* font-size: 50%; */
+        }
+
+        html,
+        body,
+        .searchfield {
+             width: 100%; 
+        }
+
+        input{
+            /* font-size: 90%; */
+            border: 1 px solid green;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="header">
+        <div id="logo">
+            <a href="landing.html">
+                <img id="logoimg" src="https://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5a2857720d9297ab4724efd5/1555346130603/?format=1500w" />
+            </a>
+        </div>
+        <div id="loginform">
+            <form>
+                <input id="username" type="text" placeholder="username">
+                <input id="password" type="password" placeholder="password">
+                <div id="validate">Validate</div>
+            </form>
+        </div>
+    </div>
+    <table id="table"></table>
+
+    <script src="js/main.js"></script>
+    <script src="js/endpoints.js"></script>
+    <script>
+
+        let filter = function (data) {
+
+            filteredusername = UsersSearchUpdated(data, "username", "searchusername")
+            console.log(filteredusername)
+            // filteredfirstname = UsersSearchUpdated(filteredusername, "firstName", "searchfirstname")
+            // filteredlastname = UsersSearchUpdated(filteredfirstname, "lastName", "searchlastname")
+            // filteredemail = UsersSearchUpdated(filteredlastname, "email", "searchemail")
+            // filteredheader = UsersSearchUpdated(filteredemail, "header", "searchheader")
+            // filteredhomephone = UsersSearchUpdated(filteredheader, "homePhone", "searchhomephone")
+            // filteredhomephone = UsersSearchUpdated(filteredemail, "homePhone", "searchhomephone")
+            // filteredcellphone = UsersSearchUpdated(filteredhomephone, "cellPhone", "searchcellphone")
+            // filtereddescription = UsersSearchUpdated(filteredcellphone, "description", "searchdescription")
+            return filteredusername
+        }
+
+        function header(id, row, text) {
+            let input = document.createElement("input")
+            let th = document.createElement("th")
+            let label = document.createElement("label")
+            label.innerHTML = text
+            input.setAttribute("id", id)
+            input.setAttribute("class", "header")
+            input.setAttribute("placeholder", text)
+            th.setAttribute("class", "item")
+            th.appendChild(label)
+            th.appendChild(input)
+            row.appendChild(th)
+        }
+
+        function appendfirst() {
+            let tr = document.createElement("tr")
+            let thead = document.createElement("thead")
+
+            header("searchusername", tr, "User Name");
+            // header("searchfirstname", tr, "First Name");
+            // header("searchlastname", tr, "Last Name");
+            // header("searchemail", tr, "Email");
+            // header("searchheader", tr, "Header");
+            // header("searchhomephone", tr, "Home");
+            // header("searchcellphone", tr, "Cell");
+            // header("searchdescription", tr, "Description");
+            // header("searchcohortlocation", tr, "Location");
+            // header("searchcohortseason", tr, "Season");
+            // header("searchcohortstartdate", tr, "Start");
+            // header("searchcohortenddate", tr, "End");
+
+            thead.appendChild(tr)
+            elID("table").appendChild(thead)
+
+        }
+        (function () {
+            let tbody
+            appendfirst()
+        }())
+
+        function cell(field, row, element) {
+            let td = document.createElement("td")
+            td.setAttribute("class", "item")
+            td.innerHTML = element[field]
+            row.appendChild(td)
+        }
+
+        let display = function (arr) {
+            if (document.getElementById("table").querySelector("tbody")) {
+                document.getElementById("table").querySelector("tbody").innerHTML = ""
+            } else {
+                tbody = document.createElement("tbody")
+            }
+
+            let tr, td
+
+            arr.forEach(element => {
+                tr = document.createElement("tr")
+
+                cell("username", tr, element)
+                //  cell("firstName", tr, element)
+                // cell("lastName", tr, element)
+                // cell("email", tr, element)
+                // cell("header", tr, element)
+                // cell("homePhone", tr, element)
+                // cell("cellPhone", tr, element)
+                // cell("description", tr, element)
+
+                tbody.appendChild(tr)
+            });
+            elID("table").appendChild(tbody)
+        }
+
+        function listen(id) {
+            document.getElementById(id).addEventListener("keydown", function () {
+                get(api().getUsers.endpoint, function (data) {
+                    console.log(filter(data))
+                    display(filter(data))
+                })
+            })
+        }
+        (function () {
+            listen("searchusername")
+            listen("searchfirstname")
+            listen("searchlastname")
+            listen("searchemail")
+            listen("searchheader")
+            listen("searchhomephone")
+            listen("searchcellphone")
+            listen("searchdescription")
+        }())                                                                                                 
+    </script>
+</body>
+
+</html>
